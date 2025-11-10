@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gui.Ai</title>
+    <link rel="icon" type="image/png" href="/static/LOGO_IA.png">
+    <link rel="stylesheet" href="/static/style_front.css">
+</head>
+
+<body>
+  
+  <div class="botao_login"> 
+  <a href ="{{ url_for('Login') }}">Login</div></a>
+
+
+    <header>
+
+    <img src="/static/LOGO_IA.png" alt="logo-gusta" id="gui-logoia" draggable="false">
+    
+    <h1>Seja muito bem vindo!</h1>
+        <a href="{{ url_for('sobre_gui') }}">Sobre <strong>GUI.IA</strong></a>
+        <a href="{{ url_for('sobre_nos') }}">Sobre nós</a>
+        <a href="{{ url_for('chatbot') }}">Usar <strong>GUI.IA</strong></a>
+    
+    </header>
+
+<style>
+
+
+.botao_login a {
+    font-size: 25px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    margin: auto;
+    position: relative;
+    bottom: 130px;
+    left: 830px;
+    background-color: aliceblue;
+    color:black;
+    padding: 10px 20px;
+    border-radius: 8px;
+    width: fit-content;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+    transform-origin: center;
+    
+}
+
+.botao_login:hover a {
+    animation:  0.5s ease-out forwards;
+    transform: scale(1.05);
+    background-color: aliceblue;
+    color:black;
+    cursor: pointer;
+}
+
+</style>
+
+    <p1>    
+        &copy; 2025 BitByteCommerce. Todos os direitos reservados.
+    </p1>
+
+</body>
+</html>

@@ -1,0 +1,108 @@
+* {
+    user-select: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+
+body {
+    background-color: black;
+    text-align: center;
+    overflow: auto;
+}
+
+p {
+    font-size: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: aliceblue;
+    margin-bottom: 100px;
+    transform: scale(0.5);
+    animation: aparecer 0.7s ease-out forwards;
+}
+
+p1 {
+    font-size: 25px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: aliceblue;
+    text-align: justify;
+    text-indent: 45px;
+    display: inline-block;
+    max-width: 80%;
+    margin-bottom: 20px;
+    transform: scale(0.5);
+    animation: aparecer 0.9s ease-out forwards;
+}
+
+p2 {
+    font-size: 25px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: aliceblue;
+    text-align: justify;
+    display: inline-block;
+    max-width: 80%;
+    margin-bottom: 20px;
+    transform: scale(0.5);
+    animation: aparecer 0.9s ease-out forwards;
+}
+
+p3 {
+    font-size: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: aliceblue;
+    text-align: justify;
+    display: inline-block;
+    max-width: 80%;
+    margin-bottom: 20px;
+}
+
+#imagem_ia {
+    margin-top: 70px;
+    margin-bottom: 200px;
+    transform: scale(0.5);
+    animation: aparecer 1.5s ease-out forwards;
+}
+
+.botao-voltar {
+    font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    display: inline-block;
+    margin: 0%;
+    position: relative;
+    bottom: -50px;
+    left: -45%;   /* move 50px para a direita */
+    color: aliceblue;
+    text-decoration: none; /* tira a linha de baixo do texto */
+    font-weight: bold; /* deixa em negrito */
+    transition: transform 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+}
+
+.botao-voltar:hover {
+    animation:  0.5s ease-out forwards;
+    transform: scale(1.3); /* é a transformação espacial do elemento. ex: scale(1) = tamanho normal (100%), scale(1.3) = 130% do tamanho original e sacle(0.5) = redução de 50% */
+    color: aliceblue;
+}
+
+#gui-logoia {
+    color: aliceblue;
+    width: 180px;
+    margin: auto;
+    margin-top: 150px;
+    margin-bottom: 45px;
+    transform: scale(0.5);
+    animation: aparecer 0.5s ease-out forwards;
+}
+
+@keyframes aparecer {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
