@@ -1,8 +1,8 @@
 import mysql.connector
-import google.generativeai as guiia
+from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_core.prompts import ChatPromptTemplate
 from dotenv import load_dotenv
 import os
-import json
 
 load_dotenv()
 api_key = os.getenv("API_KEY")
@@ -19,33 +19,43 @@ def get_database_connection():
     dados = cursor.fetchall()
     cursor.close()
     connection.close()    
-    contexto = "\n".join([f"Pergunta: {pergunta}\nResposta: {resposta}" for pergunta, resposta in dados])
+    
+    contexto = "\n".join([
+        f"Pergunta: {pergunta}\nResposta: {resposta}"
+        for pergunta, resposta in dados
+    ])
     return contexto
 
 
+llm = ChatGoogleGenerativeAI(
+    model="gemini-2.5-flash",
+    api_key=api_key,
+    temperature=0.0
+)
 
-guiia.configure(api_key=api_key)
-model = guiia.GenerativeModel("gemini-2.5-flash")
+prompt_template = ChatPromptTemplate.from_messages([
+    ("system",
+     """
+Você é um assistente útil. Use o contexto para responder detalhadamente:
+
+Instruções:
+1. Use o contexto abaixo para formular respostas explicativas.
+2. Conecte informações relacionadas sempre que possível.
+3. Evite respostas curtas; seja completo e claro.
+4. Tome um tom natural e informativo.
+
+Contexto:
+{contexto}
+     """
+    ),
+    ("human", "{pergunta_usuario}")
+])
+
 def gerar_resposta(pergunta_usuario):
     contexto = get_database_connection()
-    
-    prompt = f"""
-    Você é um assistente útil. Use o seguinte contexto para responder às perguntas dos usuários.
-
-    Contexto:
-    {contexto}
-
-    pergunta do usuário: {pergunta_usuario}
-    Instruções:
-   1. Use o contexto abaixo para formular respostas detalhadas e explicativas.
-2. Sempre que possível, conecte informações relacionadas dentro do contexto.
-3. Evite respostas curtas ou vagas; forneça explicações completas.
-4. Mantenha um tom natural e informativo, como se estivesse explicando para um colega.
-
-    """
-    
-    response = model.generate_content(prompt)
-    return response.text
-       
-
-
+    chain = prompt_template | llm
+    response = chain.invoke({
+        "contexto": contexto,
+        "pergunta_usuario": pergunta_usuario
+    })
+    return response.content
